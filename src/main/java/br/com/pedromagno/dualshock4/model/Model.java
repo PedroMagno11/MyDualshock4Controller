@@ -1,4 +1,4 @@
-package br.com.pedromagno;
+package br.com.pedromagno.dualshock4.model;
 
 /**
  * Enumerates the models that the library supports.

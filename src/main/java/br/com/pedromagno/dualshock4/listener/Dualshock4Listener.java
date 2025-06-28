@@ -1,17 +1,18 @@
-package br.com.pedromagno;
+package br.com.pedromagno.dualshock4.listener;
 
 public interface Dualshock4Listener {
 
     // Pressed
-    public void buttonDPAD_NONEPressed();
-    public void buttonDPAD_UPPressed();
-    public void buttonDPAD_DOWNPressed();
-    public void buttonDPAD_LEFTPressed();
-    public void buttonDPAD_RIGHTPressed();
-    public void buttonCROSSPressed();
-    public void buttonCIRCLEPressed();
-    public void buttonSQUAREPressed();
-    public void buttonTRIANGLEPressed();
+    void buttonDPAD_NONEPressed();
+    void buttonDPAD_UPPressed();
+    void buttonDPAD_DOWNPressed();
+    void buttonDPAD_LEFTPressed();
+    void buttonDPAD_RIGHTPressed();
+    void buttonCROSSPressed();
+    void buttonCIRCLEPressed();
+    void buttonSQUAREPressed();
+    void buttonTRIANGLEPressed();
+    void buttonPSPressed();
 
 
     // Released
@@ -24,5 +25,6 @@ public interface Dualshock4Listener {
     public void buttonCIRCLEReleased();
     public void buttonSQUAREReleased();
     public void buttonTRIANGLEReleased();
+    public void buttonPSReleased();
 
 }

@@ -1,9 +1,9 @@
-package br.com.pedromagno.driver;
+package br.com.pedromagno.dualshock4.driver;
 
-import br.com.pedromagno.Button;
-import br.com.pedromagno.ButtonEnum;
-import br.com.pedromagno.Dualshock4Listener;
-import br.com.pedromagno.Model;
+import br.com.pedromagno.dualshock4.button.Button;
+import br.com.pedromagno.dualshock4.button.ButtonEnum;
+import br.com.pedromagno.dualshock4.listener.Dualshock4Listener;
+import br.com.pedromagno.dualshock4.model.Model;
 import br.com.pedromagno.exceptions.Dualshock4NotConnectedException;
 import br.com.pedromagno.exceptions.Dualshock4NotFoundException;
 import br.com.pedromagno.exceptions.InvalidDeviceException;

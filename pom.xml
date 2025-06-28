@@ -13,5 +13,24 @@
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.hid4java/hid4java -->
+        <dependency>
+            <groupId>org.hid4java</groupId>
+            <artifactId>hid4java</artifactId>
+            <version>0.8.0</version>
+        </dependency>
+    </dependencies>
+    <repositories>
+        <repository>
+            <id>oss.sonatype.org-snapshot</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 </project>

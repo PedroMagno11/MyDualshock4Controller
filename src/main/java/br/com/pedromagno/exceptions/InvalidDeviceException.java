@@ -1,7 +1,7 @@
 package br.com.pedromagno.exceptions;
 
-public class InvalidDualshock4Exception extends RuntimeException {
-    public InvalidDualshock4Exception(String message) {
+public class InvalidDeviceException extends Exception {
+    public InvalidDeviceException(String message) {
         super(message);
     }
 }

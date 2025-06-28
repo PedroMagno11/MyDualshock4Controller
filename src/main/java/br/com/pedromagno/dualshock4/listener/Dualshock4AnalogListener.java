@@ -1,4 +1,4 @@
 package br.com.pedromagno.dualshock4.listener;
 
-public class Dualshock4AnalogListener {
+public interface Dualshock4AnalogListener {
 }

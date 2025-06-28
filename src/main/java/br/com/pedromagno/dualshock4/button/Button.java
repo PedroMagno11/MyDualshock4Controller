@@ -1,4 +1,6 @@
-package br.com.pedromagno;
+package br.com.pedromagno.dualshock4.button;
+
+import br.com.pedromagno.dualshock4.listener.Dualshock4Listener;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -70,6 +72,7 @@ public class Button {
         Thread thread = new Thread(() -> {
             try {
                 Method m1 = listener.getClass().getMethod("button" + button.toString() + "Pressed", null);
+                m1.setAccessible(true);
                 m1.invoke(listener, null);
 
                 long t;
@@ -82,6 +85,7 @@ public class Button {
                 } while (d < INTERVAL); // while the button is activated, the client will not be notified about release event.
 
                 Method m2 = listener.getClass().getMethod("button" + button.toString()+"Released", null);
+                m2.setAccessible(true);
                 m2.invoke(listener, null);
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException |
                      NoSuchMethodException | SecurityException | InterruptedException ex) {

@@ -1,4 +1,4 @@
-package br.com.pedromagno;
+package br.com.pedromagno.dualshock4.button;
 
 /**
  * Enum to map DualShock buttons.
