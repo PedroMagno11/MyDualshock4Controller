@@ -16,6 +16,8 @@ public interface Dualshock4Listener {
     void buttonSHAREPressed();
     void buttonOPTIONSPressed();
     void buttonTOUCHPADPressed();
+    void buttonL2_DIGITALPressed();
+    void buttonR2_DIGITALPressed();
 
     // Released
     void buttonDPAD_NONEReleased();
@@ -31,5 +33,6 @@ public interface Dualshock4Listener {
     void buttonSHAREReleased();
     void buttonOPTIONSReleased();
     void buttonTOUCHPADReleased();
-
+    void buttonL2_DIGITALReleased();
+    void buttonR2_DIGITALReleased();
 }

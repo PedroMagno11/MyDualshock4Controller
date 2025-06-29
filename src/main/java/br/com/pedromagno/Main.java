@@ -1,12 +1,35 @@
 package br.com.pedromagno;
 
+import br.com.pedromagno.dualshock4.button.AnalogButtonState;
+import br.com.pedromagno.dualshock4.button.FireMode;
 import br.com.pedromagno.dualshock4.driver.Dualshock4Driver;
+import br.com.pedromagno.dualshock4.listener.Dualshock4AnalogListener;
 import br.com.pedromagno.dualshock4.listener.Dualshock4Listener;
 
 public class Main {
     public static void main(String[] args) {
 
-        Dualshock4Driver ps4 = new Dualshock4Driver(new Dualshock4Listener() {
+        Dualshock4Driver ps4 = new Dualshock4Driver(new Dualshock4AnalogListener() {
+
+            @Override
+            public void buttonL2Changed(float value) {
+                System.out.println("L2: " + value);
+            }
+
+            @Override
+            public void buttonR2Changed(float value) {
+
+            }
+
+            @Override
+            public void onLeftStickMoved(AnalogButtonState newLeft) {
+
+            }
+
+            @Override
+            public void onRightStickMoved(AnalogButtonState newRight) {
+
+            }
 
             @Override
             public void buttonDPAD_NONEPressed() {
@@ -117,6 +140,16 @@ public class Main {
             }
 
             @Override
+            public void buttonL2_DIGITALPressed() {
+                System.out.println("[L2]");
+            }
+
+            @Override
+            public void buttonR2_DIGITALPressed() {
+                System.out.println("[R2]");
+            }
+
+            @Override
             public void buttonPSReleased() {
                 System.out.println("PS");
             }
@@ -136,8 +169,18 @@ public class Main {
                 System.out.println("TOUCHPAD");
             }
 
+            @Override
+            public void buttonL2_DIGITALReleased() {
+                System.out.println("L2");
+            }
 
-        }, 0.0);
+            @Override
+            public void buttonR2_DIGITALReleased() {
+                System.out.println("R2");
+            }
+
+
+        }, FireMode.CONTINUOUS);
 
         ps4.connect();
         ps4.startListening();
@@ -151,4 +194,5 @@ public class Main {
 
         ps4.stopListening();
     }
+
 }
