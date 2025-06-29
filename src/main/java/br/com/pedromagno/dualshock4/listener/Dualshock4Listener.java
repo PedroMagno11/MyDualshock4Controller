@@ -13,18 +13,23 @@ public interface Dualshock4Listener {
     void buttonSQUAREPressed();
     void buttonTRIANGLEPressed();
     void buttonPSPressed();
-
+    void buttonSHAREPressed();
+    void buttonOPTIONSPressed();
+    void buttonTOUCHPADPressed();
 
     // Released
-    public void buttonDPAD_NONEReleased();
-    public void buttonDPAD_UPReleased();
-    public void buttonDPAD_DOWNReleased();
-    public void buttonDPAD_LEFTReleased();
-    public void buttonDPAD_RIGHTReleased();
-    public void buttonCROSSReleased();
-    public void buttonCIRCLEReleased();
-    public void buttonSQUAREReleased();
-    public void buttonTRIANGLEReleased();
-    public void buttonPSReleased();
+    void buttonDPAD_NONEReleased();
+    void buttonDPAD_UPReleased();
+    void buttonDPAD_DOWNReleased();
+    void buttonDPAD_LEFTReleased();
+    void buttonDPAD_RIGHTReleased();
+    void buttonCROSSReleased();
+    void buttonCIRCLEReleased();
+    void buttonSQUAREReleased();
+    void buttonTRIANGLEReleased();
+    void buttonPSReleased();
+    void buttonSHAREReleased();
+    void buttonOPTIONSReleased();
+    void buttonTOUCHPADReleased();
 
 }

@@ -3,21 +3,6 @@ package br.com.pedromagno;
 import br.com.pedromagno.dualshock4.driver.Dualshock4Driver;
 import br.com.pedromagno.dualshock4.listener.Dualshock4Listener;
 
-
-//printf("[X] ");
-//                if (input.square)   printf("[■] ");
-//                if (input.triangle) printf("[▲] ");
-//                if (input.l1)       printf("[L1] ");
-//                if (input.r1)       printf("[R1] ");
-//                if (input.l2_digital) printf("[L2] ");
-//                if (input.r2_digital) printf("[R2] ");
-//                if (input.share)    printf("[SHARE] ");
-//                if (input.options)  printf("[OPTIONS] ");
-//                if (input.ps)       printf("[PS] ");
-//                if (input.touchpad) printf("[TPAD] ");
-//                if (input.l3)       printf("[L3] ");
-//                if (input.r3)       printf("[R3] ");
-
 public class Main {
     public static void main(String[] args) {
 
@@ -105,22 +90,50 @@ public class Main {
 
             @Override
             public void buttonTRIANGLEPressed() {
-
+                System.out.println("[▲]");
             }
-
-            @Override
-            public void buttonPSPressed() {
-
-            }
-
             @Override
             public void buttonTRIANGLEReleased() {
+                System.out.println("▲");
+            }
+            @Override
+            public void buttonPSPressed() {
+                System.out.println("[PS]");
+            }
 
+            @Override
+            public void buttonSHAREPressed() {
+                System.out.println("[SHARE]");
+            }
+
+            @Override
+            public void buttonOPTIONSPressed() {
+                System.out.println("[OPTIONS]");
+            }
+
+            @Override
+            public void buttonTOUCHPADPressed() {
+                System.out.println("[TOUCHPAD]");
             }
 
             @Override
             public void buttonPSReleased() {
+                System.out.println("PS");
+            }
 
+            @Override
+            public void buttonSHAREReleased() {
+                System.out.println("SHARE");
+            }
+
+            @Override
+            public void buttonOPTIONSReleased() {
+                System.out.println("OPTIONS");
+            }
+
+            @Override
+            public void buttonTOUCHPADReleased() {
+                System.out.println("TOUCHPAD");
             }
 
 
