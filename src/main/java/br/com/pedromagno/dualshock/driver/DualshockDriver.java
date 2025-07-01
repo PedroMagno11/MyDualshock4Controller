@@ -42,7 +42,7 @@ public class DualshockDriver implements Driver{
                     d.getProduct().equalsIgnoreCase("Wireless Controller")
             ){
                 device = d;
-                System.out.printf("Dualshock 4 found.\nProduct ID: 0x%04X\nVendor ID: 0x%04X", device.getProductId(), device.getVendorId());
+                System.out.printf("Dualshock 4 found.\nProduct ID: 0x%04X\nVendor ID: 0x%04X\n", device.getProductId(), device.getVendorId());
                 return;
             }
         }
@@ -81,7 +81,7 @@ public class DualshockDriver implements Driver{
             int bytesRead = device.read(report, 100);
 
             if(bytesRead == -1){
-                running = false;
+                stopListening();
             }
 
             if(bytesRead > 0){
@@ -100,14 +100,19 @@ public class DualshockDriver implements Driver{
             boolean pressed = b.isPressed(report);
 
             if(listener.getButtonFireMode().equals(FireMode.CONSTANT_FIRE)){
-               if(wasPressed && pressed){
-                   button.setPressed(true);
-                   button.fire();
-               } if(wasPressed && !pressed){
-                   button.setPressed(false);
-                   button.fire();
+
+                if(wasPressed && pressed) {
+                       button.setPressed(true);
+                       button.fire();
                }
+
+               if (wasPressed && !pressed) {
+                       button.setPressed(false);
+                       button.fire();
+               }
+
             }
+
             else if (listener.getButtonFireMode().equals(FireMode.TIMED_FIRE)){
                 if(!wasPressed && pressed){
                     button.setPressed(true);
@@ -121,7 +126,7 @@ public class DualshockDriver implements Driver{
 
     @Override
     public void stopListening() {
-
+        running = false;
     }
 
     public boolean isRunning(){

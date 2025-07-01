@@ -13,6 +13,12 @@ public abstract class DualshockDigital implements Dualshock {
 
     public abstract void buttonCROSSPressed();
     public abstract void buttonCROSSReleased();
+    public abstract void buttonSQUAREPressed();
+    public abstract void buttonSQUAREReleased();
+    public abstract void buttonTRIANGLEPressed();
+    public abstract void buttonTRIANGLEReleased();
+    public abstract void buttonCIRCLEPressed();
+    public abstract void buttonCIRCLEReleased();
 
 
     @Override

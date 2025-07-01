@@ -73,12 +73,31 @@ public class DigitalButton implements Button {
         }
 
         if(fireMode == FireMode.CONSTANT_FIRE){
-            System.out.println("Pressed button: " + button + "CONTANT");
             if(isReleased()){
                 fireReleased();
             }
+
+            long elapsed = now - lastTimestamp;
+
+            if(elapsed >= DigitalButtonConfig.INTERVAL){
+                lastTimestamp = now;
+                constantFire();
+            }
         }
 
+    }
+
+    @Override
+    public void constantFire() {
+        executorService.submit(()->{
+            try {
+                Method pressed = dualshockListener.getClass().getMethod("button" + button + "Pressed");
+                pressed.setAccessible(true);
+                pressed.invoke(dualshockListener);
+            } catch (Exception ex){
+                LOGGER.log(Level.SEVERE, "Erro in button fire: " + button, ex);
+            }
+        });
     }
 
     @Override
