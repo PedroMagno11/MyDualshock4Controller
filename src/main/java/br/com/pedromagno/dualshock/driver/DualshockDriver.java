@@ -1,8 +1,6 @@
 package br.com.pedromagno.dualshock.driver;
 
-import br.com.pedromagno.dualshock.button.digital.Button;
 import br.com.pedromagno.dualshock.button.digital.DigitalButton;
-import br.com.pedromagno.dualshock.button.digital.enums.DPadDigitalButtonEnum;
 import br.com.pedromagno.dualshock.button.digital.enums.DigitalFaceButtonEnum;
 import br.com.pedromagno.dualshock.button.digital.enums.DigitalButtonEnum;
 import br.com.pedromagno.dualshock.button.fire.FireMode;
@@ -20,7 +18,7 @@ public class DualshockDriver implements Driver{
     private HidDevice device;
     private Dualshock listener;
     private boolean running;
-    private HashMap<DigitalFaceButtonEnum, DigitalButton> digitalFaceButtons = new HashMap<>();
+    private HashMap<DigitalFaceButtonEnum, DigitalButton> digitalButtons = new HashMap<>();
 
 
     public DualshockDriver(Dualshock listener) {;
@@ -28,9 +26,8 @@ public class DualshockDriver implements Driver{
         this.running = false;
 
         for(DigitalFaceButtonEnum digitalButton: DigitalFaceButtonEnum.values()) {
-            digitalFaceButtons.put(digitalButton, new DigitalButton(listener, digitalButton));
+            digitalButtons.put(digitalButton, new DigitalButton(listener, digitalButton));
         }
-
 
     }
 
@@ -77,6 +74,7 @@ public class DualshockDriver implements Driver{
         byte[] report = new byte[64];
         byte[] lastReport = new byte[64];
 
+        int counter = 0; // Monitora a quantidade de execuções
         while(running){
             int bytesRead = device.read(report, 100);
 
@@ -85,14 +83,15 @@ public class DualshockDriver implements Driver{
             }
 
             if(bytesRead > 0){
-                processDigitalButton(report, lastReport);
+                processDigitalButton(report, lastReport, counter);
                 System.arraycopy(report, 0, lastReport, 0, report.length);
             }
+            counter += 1;
         }
     }
 
-    private void processDigitalButton(byte[] report, byte[] lastReport) {
-        for(Map.Entry<DigitalFaceButtonEnum, DigitalButton> entry: digitalFaceButtons.entrySet()){
+    private void processDigitalButton(byte[] report, byte[] lastReport, int counter) {
+        for(Map.Entry<DigitalFaceButtonEnum, DigitalButton> entry: digitalButtons.entrySet()){
             DigitalFaceButtonEnum b = entry.getKey();
             DigitalButton button = entry.getValue();
 
@@ -101,16 +100,17 @@ public class DualshockDriver implements Driver{
 
             if(listener.getButtonFireMode().equals(FireMode.CONSTANT_FIRE)){
 
-                if(wasPressed && pressed) {
-                       button.setPressed(true);
-                       button.fire();
-               }
+                if(counter > 0){
+                    if(wasPressed && pressed) {
+                        button.setPressed(true);
+                        button.fire();
+                    }
 
-               if (wasPressed && !pressed) {
-                       button.setPressed(false);
-                       button.fire();
-               }
-
+                    if (wasPressed && !pressed) {
+                        button.setPressed(false);
+                        button.fire();
+                    }
+                }
             }
 
             else if (listener.getButtonFireMode().equals(FireMode.TIMED_FIRE)){

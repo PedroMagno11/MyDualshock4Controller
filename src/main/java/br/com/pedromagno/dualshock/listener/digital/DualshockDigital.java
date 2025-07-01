@@ -20,6 +20,15 @@ public abstract class DualshockDigital implements Dualshock {
     public abstract void buttonCIRCLEPressed();
     public abstract void buttonCIRCLEReleased();
 
+    public abstract void buttonDPAD_UPPressed();
+    public abstract void buttonDPAD_UPReleased();
+    public abstract void buttonDPAD_DOWNPressed();
+    public abstract void buttonDPAD_DOWNReleased();
+    public abstract void buttonDPAD_LEFTPressed();
+    public abstract void buttonDPAD_LEFTReleased();
+    public abstract void buttonDPAD_RIGHTPressed();
+    public abstract void buttonDPAD_RIGHTReleased();
+
 
     @Override
     public FireMode getButtonFireMode() {

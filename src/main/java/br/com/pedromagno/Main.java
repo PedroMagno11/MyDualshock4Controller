@@ -9,7 +9,7 @@ import br.com.pedromagno.dualshock.listener.digital.DualshockDigital;
 public class Main {
     public static void main(String[] args) {
 
-        DualshockDriver ps4 = new DualshockDriver(new DualshockDigital(FireMode.CONSTANT_FIRE) {
+        DualshockDriver ps4 = new DualshockDriver(new DualshockDigital(FireMode.TIMED_FIRE) {
             @Override
             public void buttonCROSSPressed() {
                 System.out.println("CROSS PRESSED");
@@ -49,6 +49,47 @@ public class Main {
             public void buttonCIRCLEReleased() {
                 System.out.println("CIRCLE RELEASED");
             }
+
+            @Override
+            public void buttonDPAD_UPPressed() {
+                System.out.println("DPAD_UP PRESSED");
+            }
+
+            @Override
+            public void buttonDPAD_UPReleased() {
+                System.out.println("DPAD_UP RELEASED");
+            }
+
+            @Override
+            public void buttonDPAD_DOWNPressed() {
+                System.out.println("DPAD_DOWN PRESSED");
+            }
+
+            @Override
+            public void buttonDPAD_DOWNReleased() {
+                System.out.println("DPAD_DOWN RELEASED");
+            }
+
+            @Override
+            public void buttonDPAD_LEFTPressed() {
+                System.out.println("DPAD_LEFT PRESSED");
+            }
+
+            @Override
+            public void buttonDPAD_LEFTReleased() {
+                System.out.println("DPAD_LEFT RELEASED");
+            }
+
+            @Override
+            public void buttonDPAD_RIGHTPressed() {
+                System.out.println("DPAD_RIGHT PRESSED");
+            }
+
+            @Override
+            public void buttonDPAD_RIGHTReleased() {
+                System.out.println("DPAD_RIGHT RELEASED");
+            }
+
 
             @Override
             public FireMode getButtonFireMode() {
