@@ -1,6 +1,6 @@
 package br.com.pedromagno.dualshock.button.digital.enums;
 
-public enum DigitalFaceButtonEnum implements DigitalButtonEnum {
+public enum DualshockDigitalButtonEnum implements DigitalButtonEnum {
     SQUARE(5, 0x10),
     CROSS(5, 0x20),
     CIRCLE(5, 0x40),
@@ -18,7 +18,7 @@ public enum DigitalFaceButtonEnum implements DigitalButtonEnum {
     private final int bitValue;
     private volatile boolean pressed = false;
 
-    DigitalFaceButtonEnum(int byteIndex, int byteValue) {
+    DualshockDigitalButtonEnum(int byteIndex, int byteValue) {
         this.byteIndex = byteIndex;
         this.bitValue = byteValue;
     }

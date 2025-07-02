@@ -1,13 +1,12 @@
 package br.com.pedromagno.dualshock.listener.digital;
 
 import br.com.pedromagno.dualshock.button.fire.FireMode;
-import br.com.pedromagno.dualshock.listener.Dualshock;
 
-public abstract class DualshockDigital implements Dualshock {
+public abstract class DualshockDigitalListener {
 
     private FireMode fireMode;
 
-    public DualshockDigital(FireMode fireMode) {
+    public DualshockDigitalListener(FireMode fireMode) {
         this.fireMode = fireMode;
     }
 
@@ -30,7 +29,6 @@ public abstract class DualshockDigital implements Dualshock {
     public abstract void buttonDPAD_RIGHTReleased();
 
 
-    @Override
     public FireMode getButtonFireMode() {
         return fireMode;
     }

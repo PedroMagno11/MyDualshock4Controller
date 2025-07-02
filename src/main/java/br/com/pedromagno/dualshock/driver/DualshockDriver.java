@@ -1,32 +1,43 @@
 package br.com.pedromagno.dualshock.driver;
 
-import br.com.pedromagno.dualshock.button.digital.DigitalButton;
-import br.com.pedromagno.dualshock.button.digital.enums.DigitalFaceButtonEnum;
-import br.com.pedromagno.dualshock.button.digital.enums.DigitalButtonEnum;
+import br.com.pedromagno.dualshock.button.analog.DualshockAnalogButton;
+import br.com.pedromagno.dualshock.button.analog.enums.DualshockAnalogButtonEnum;
+import br.com.pedromagno.dualshock.button.digital.DualshockDigitalButton;
+import br.com.pedromagno.dualshock.button.digital.enums.DualshockDigitalButtonEnum;
 import br.com.pedromagno.dualshock.button.fire.FireMode;
-import br.com.pedromagno.dualshock.listener.Dualshock;
+import br.com.pedromagno.dualshock.listener.analog.DualshockAnalogListener;
+import br.com.pedromagno.dualshock.listener.digital.DualshockDigitalListener;
 import br.com.pedromagno.exceptions.Dualshock4NotFoundException;
 import br.com.pedromagno.exceptions.NullDeviceException;
 import org.hid4java.HidDevice;
 import org.hid4java.HidServices;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class DualshockDriver implements Driver{
 
     private HidDevice device;
-    private Dualshock listener;
+    private DualshockDigitalListener digitalListener;
+    private DualshockAnalogListener analogListener;
     private boolean running;
-    private HashMap<DigitalFaceButtonEnum, DigitalButton> digitalButtons = new HashMap<>();
+    private HashMap<DualshockDigitalButtonEnum, DualshockDigitalButton> digitalButtons = new HashMap<>();
+    private HashMap<DualshockAnalogButtonEnum, DualshockAnalogButton> analogButtons = new HashMap<>();
 
 
-    public DualshockDriver(Dualshock listener) {;
-        this.listener = listener;
+    public DualshockDriver(DualshockDigitalListener digitalListener, DualshockAnalogListener analogListener) {;
+        this.digitalListener = digitalListener;
+        this.analogListener = analogListener;
+
         this.running = false;
 
-        for(DigitalFaceButtonEnum digitalButton: DigitalFaceButtonEnum.values()) {
-            digitalButtons.put(digitalButton, new DigitalButton(listener, digitalButton));
+        for(DualshockDigitalButtonEnum digitalButton: DualshockDigitalButtonEnum.values()) {
+            digitalButtons.put(digitalButton, new DualshockDigitalButton(digitalListener, digitalButton));
+        }
+
+        for(DualshockAnalogButtonEnum analogButton: DualshockAnalogButtonEnum.values()) {
+            analogButtons.put(analogButton, new DualshockAnalogButton(analogListener, analogButton));
         }
 
     }
@@ -84,6 +95,7 @@ public class DualshockDriver implements Driver{
 
             if(bytesRead > 0){
                 processDigitalButton(report, lastReport, counter);
+                processAnalogButton(report, lastReport);
                 System.arraycopy(report, 0, lastReport, 0, report.length);
             }
             counter += 1;
@@ -91,14 +103,14 @@ public class DualshockDriver implements Driver{
     }
 
     private void processDigitalButton(byte[] report, byte[] lastReport, int counter) {
-        for(Map.Entry<DigitalFaceButtonEnum, DigitalButton> entry: digitalButtons.entrySet()){
-            DigitalFaceButtonEnum b = entry.getKey();
-            DigitalButton button = entry.getValue();
+        for(Map.Entry<DualshockDigitalButtonEnum, DualshockDigitalButton> entry: digitalButtons.entrySet()){
+            DualshockDigitalButtonEnum b = entry.getKey();
+            DualshockDigitalButton button = entry.getValue();
 
             boolean wasPressed = b.isPressed(lastReport);
             boolean pressed = b.isPressed(report);
 
-            if(listener.getButtonFireMode().equals(FireMode.CONSTANT_FIRE)){
+            if(digitalListener.getButtonFireMode().equals(FireMode.CONSTANT_FIRE)){
 
                 if(counter > 0){
                     if(wasPressed && pressed) {
@@ -113,13 +125,24 @@ public class DualshockDriver implements Driver{
                 }
             }
 
-            else if (listener.getButtonFireMode().equals(FireMode.TIMED_FIRE)){
+            else if (digitalListener.getButtonFireMode().equals(FireMode.TIMED_FIRE)){
                 if(!wasPressed && pressed){
                     button.setPressed(true);
                     button.fire();
                 }else{
                     button.setPressed(false);
                 }
+            }
+        }
+    }
+
+    private void processAnalogButton(byte[] report, byte[] lastReport) {
+        for(Map.Entry<DualshockAnalogButtonEnum, DualshockAnalogButton> entry: analogButtons.entrySet()){
+            DualshockAnalogButtonEnum b = entry.getKey();
+            DualshockAnalogButton button = entry.getValue();
+
+            if(button.isMoved(report, lastReport)){
+                button.fire(report);
             }
         }
     }

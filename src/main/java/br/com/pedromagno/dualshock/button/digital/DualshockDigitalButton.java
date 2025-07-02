@@ -3,7 +3,7 @@ package br.com.pedromagno.dualshock.button.digital;
 import br.com.pedromagno.dualshock.button.config.DigitalButtonConfig;
 import br.com.pedromagno.dualshock.button.digital.enums.DigitalButtonEnum;
 import br.com.pedromagno.dualshock.button.fire.FireMode;
-import br.com.pedromagno.dualshock.listener.Dualshock;
+import br.com.pedromagno.dualshock.listener.digital.DualshockDigitalListener;
 
 import java.lang.reflect.Method;
 import java.util.concurrent.ExecutorService;
@@ -11,17 +11,17 @@ import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class DigitalButton implements Button {
-    private static final Logger LOGGER = Logger.getLogger(DigitalButton.class.getName());
+public class DualshockDigitalButton implements Button {
+    private static final Logger LOGGER = Logger.getLogger(DualshockDigitalButton.class.getName());
     private static final ExecutorService executorService = Executors.newCachedThreadPool();
 
     private DigitalButtonEnum button;
-    private Dualshock dualshockListener;
+    private DualshockDigitalListener dualshockListener;
     private volatile boolean pressed = false;
     private FireMode fireMode;
     private long lastTimestamp = 0;
 
-    public DigitalButton(Dualshock dualshockListener, DigitalButtonEnum button) {
+    public DualshockDigitalButton(DualshockDigitalListener dualshockListener, DigitalButtonEnum button) {
         this.button = button;
         this.dualshockListener = dualshockListener;
         this.fireMode = dualshockListener.getButtonFireMode();
@@ -84,7 +84,6 @@ public class DigitalButton implements Button {
                 constantFire();
             }
         }
-
     }
 
     @Override

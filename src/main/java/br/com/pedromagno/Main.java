@@ -3,13 +3,15 @@ package br.com.pedromagno;
 
 import br.com.pedromagno.dualshock.button.fire.FireMode;
 import br.com.pedromagno.dualshock.driver.DualshockDriver;
-import br.com.pedromagno.dualshock.listener.digital.DualshockDigital;
+import br.com.pedromagno.dualshock.listener.analog.DualshockAnalogListener;
+import br.com.pedromagno.dualshock.listener.digital.DualshockDigitalListener;
 
 
 public class Main {
     public static void main(String[] args) {
 
-        DualshockDriver ps4 = new DualshockDriver(new DualshockDigital(FireMode.TIMED_FIRE) {
+        DualshockDriver ps4 = new DualshockDriver(new DualshockDigitalListener(FireMode.TIMED_FIRE) {
+
             @Override
             public void buttonCROSSPressed() {
                 System.out.println("CROSS PRESSED");
@@ -90,13 +92,11 @@ public class Main {
                 System.out.println("DPAD_RIGHT RELEASED");
             }
 
-
+        }, new DualshockAnalogListener() {
             @Override
-            public FireMode getButtonFireMode() {
-                return super.getButtonFireMode();
+            public void buttonL2Moved(float value) {
+                System.out.println("L2 MOVED: " + value);
             }
-
-
         });
 
         try{
