@@ -1,35 +1,33 @@
 package br.com.pedromagno.dualshock.listener.digital;
 
-import br.com.pedromagno.dualshock.button.fire.FireMode;
 
-public abstract class DualshockDigitalListener {
+public interface DualshockDigitalListener {
+    void buttonCROSSPressed();
+    void buttonCROSSReleased();
+    void buttonSQUAREPressed();
+    void buttonSQUAREReleased();
+    void buttonTRIANGLEPressed();
+    void buttonTRIANGLEReleased();
+    void buttonCIRCLEPressed();
+    void buttonCIRCLEReleased();
 
-    private FireMode fireMode;
+    void buttonDPAD_UPPressed();
+    void buttonDPAD_UPReleased();
+    void buttonDPAD_DOWNPressed();
+    void buttonDPAD_DOWNReleased();
+    void buttonDPAD_LEFTPressed();
+    void buttonDPAD_LEFTReleased();
+    void buttonDPAD_RIGHTPressed();
+    void buttonDPAD_RIGHTReleased();
 
-    public DualshockDigitalListener(FireMode fireMode) {
-        this.fireMode = fireMode;
-    }
+    void buttonL1Pressed();
+    void buttonL1Released();
+    void buttonR1Pressed();
+    void buttonR1Released();
 
-    public abstract void buttonCROSSPressed();
-    public abstract void buttonCROSSReleased();
-    public abstract void buttonSQUAREPressed();
-    public abstract void buttonSQUAREReleased();
-    public abstract void buttonTRIANGLEPressed();
-    public abstract void buttonTRIANGLEReleased();
-    public abstract void buttonCIRCLEPressed();
-    public abstract void buttonCIRCLEReleased();
+    void buttonSHAREPressed();
+    void buttonSHAREReleased();
 
-    public abstract void buttonDPAD_UPPressed();
-    public abstract void buttonDPAD_UPReleased();
-    public abstract void buttonDPAD_DOWNPressed();
-    public abstract void buttonDPAD_DOWNReleased();
-    public abstract void buttonDPAD_LEFTPressed();
-    public abstract void buttonDPAD_LEFTReleased();
-    public abstract void buttonDPAD_RIGHTPressed();
-    public abstract void buttonDPAD_RIGHTReleased();
-
-
-    public FireMode getButtonFireMode() {
-        return fireMode;
-    }
+    void buttonOPTIONSPressed();
+    void buttonOPTIONSReleased();
 }

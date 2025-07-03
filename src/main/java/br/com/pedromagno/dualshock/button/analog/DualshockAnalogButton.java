@@ -30,26 +30,20 @@ public class DualshockAnalogButton implements Analog {
         return button.readValue(report) == button.readValue(lastReport);
     }
 
-    public void setMoved(boolean moved) {
-        this.moved = moved;
-    }
 
     @Override
     public void fire(byte[] report) {
 
         float value = button.readValue(report);
 
-        if(value != 0.0){
-            executorService.submit(()->{
-                try {
-                    Method pressed = dualshockListener.getClass().getMethod("button" + button + "Moved", float.class);
-                    pressed.setAccessible(true);
-                    pressed.invoke(dualshockListener, value);
-                } catch (Exception ex){
-                    LOGGER.log(Level.SEVERE, "Erro in button fire: " + button, ex);
-                }
-            });
-        }
-
+        executorService.submit(()->{
+            try {
+                Method pressed = dualshockListener.getClass().getMethod("button" + button + "Moved", float.class);
+                pressed.setAccessible(true);
+                pressed.invoke(dualshockListener, value);
+            } catch (Exception ex){
+                LOGGER.log(Level.SEVERE, "Erro in button fire: " + button, ex);
+            }
+        });
     }
 }

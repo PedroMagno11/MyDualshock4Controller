@@ -12,7 +12,9 @@ public enum DualshockDigitalButtonEnum implements DigitalButtonEnum {
     DPAD_LEFT(5, 0x06),
 
     L1(6, 0x01),
-    R1(6, 0x02);
+    R1(6, 0x02),
+    SHARE(6, 0x10),
+    OPTIONS(6, 0x20);
 
     private final int byteIndex;
     private final int bitValue;

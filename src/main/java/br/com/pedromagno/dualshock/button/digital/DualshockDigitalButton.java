@@ -3,7 +3,7 @@ package br.com.pedromagno.dualshock.button.digital;
 import br.com.pedromagno.dualshock.button.config.DigitalButtonConfig;
 import br.com.pedromagno.dualshock.button.digital.enums.DigitalButtonEnum;
 import br.com.pedromagno.dualshock.button.fire.FireMode;
-import br.com.pedromagno.dualshock.listener.digital.DualshockDigitalListener;
+import br.com.pedromagno.dualshock.listener.DualshockAbstract;
 
 import java.lang.reflect.Method;
 import java.util.concurrent.ExecutorService;
@@ -16,15 +16,15 @@ public class DualshockDigitalButton implements Button {
     private static final ExecutorService executorService = Executors.newCachedThreadPool();
 
     private DigitalButtonEnum button;
-    private DualshockDigitalListener dualshockListener;
+    private DualshockAbstract dualshockAbstractListener;
     private volatile boolean pressed = false;
     private FireMode fireMode;
     private long lastTimestamp = 0;
 
-    public DualshockDigitalButton(DualshockDigitalListener dualshockListener, DigitalButtonEnum button) {
+    public DualshockDigitalButton(DualshockAbstract dualshockAbstractListener, DigitalButtonEnum button) {
         this.button = button;
-        this.dualshockListener = dualshockListener;
-        this.fireMode = dualshockListener.getButtonFireMode();
+        this.dualshockAbstractListener = dualshockAbstractListener;
+        this.fireMode = dualshockAbstractListener.getFireMode();
     }
 
 
@@ -56,16 +56,16 @@ public class DualshockDigitalButton implements Button {
 
             executorService.submit(()->{
                 try {
-                    Method pressed = dualshockListener.getClass().getMethod("button" + button + "Pressed");
+                    Method pressed = dualshockAbstractListener.getClass().getMethod("button" + button + "Pressed");
                     pressed.setAccessible(true);
-                    pressed.invoke(dualshockListener);
+                    pressed.invoke(dualshockAbstractListener);
 
                     Thread.sleep(DigitalButtonConfig.INTERVAL);
 
-                    Method released = dualshockListener.getClass().getMethod("button" + button + "Released");
+                    Method released = dualshockAbstractListener.getClass().getMethod("button" + button + "Released");
                     released.setAccessible(true);
                     this.pressed = false;
-                    released.invoke(dualshockListener);
+                    released.invoke(dualshockAbstractListener);
                 } catch (Exception ex){
                     LOGGER.log(Level.SEVERE, "Erro in button fire: " + button, ex);
                 }
@@ -90,9 +90,9 @@ public class DualshockDigitalButton implements Button {
     public void constantFire() {
         executorService.submit(()->{
             try {
-                Method pressed = dualshockListener.getClass().getMethod("button" + button + "Pressed");
+                Method pressed = dualshockAbstractListener.getClass().getMethod("button" + button + "Pressed");
                 pressed.setAccessible(true);
-                pressed.invoke(dualshockListener);
+                pressed.invoke(dualshockAbstractListener);
             } catch (Exception ex){
                 LOGGER.log(Level.SEVERE, "Erro in button fire: " + button, ex);
             }
@@ -103,10 +103,10 @@ public class DualshockDigitalButton implements Button {
     public void fireReleased() {
         executorService.submit(()->{
             try {
-                Method released = dualshockListener.getClass().getMethod("button" + button + "Released");
+                Method released = dualshockAbstractListener.getClass().getMethod("button" + button + "Released");
                 released.setAccessible(true);
                 this.pressed = false;
-                released.invoke(dualshockListener);
+                released.invoke(dualshockAbstractListener);
             } catch (Exception ex){
                 LOGGER.log(Level.SEVERE, "Erro in button fire released: " + button, ex);
             }

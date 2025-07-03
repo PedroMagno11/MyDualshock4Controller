@@ -1,11 +1,13 @@
 package br.com.pedromagno.dualshock.listener.analog;
 
-public abstract class DualshockAnalogListener {
+public interface DualshockAnalogListener {
 
-    public DualshockAnalogListener() {
 
-    }
-
-    public abstract void buttonL2Moved(float value);
+    void buttonL2Moved(float value);
+    void buttonR2Moved(float value);
+    void buttonLXMoved(float value);
+    void buttonRXMoved(float value);
+    void buttonLYMoved(float value);
+    void buttonRYMoved(float value);
 
 }
