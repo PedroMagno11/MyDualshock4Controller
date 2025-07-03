@@ -6,13 +6,19 @@
 
     <groupId>br.com.pedromagno</groupId>
     <artifactId>myDualshock4Controller</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
+
+    <name>My Dualshock 4 Controller Driver</name>
+    <description>Java library to interface with DualShock 4 controllers via hid4java</description>
+    <url>https://github.com/PedroMagno11/MyDualshock4Controller</url>
+
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.hid4java/hid4java -->
         <dependency>
@@ -33,4 +39,30 @@
             </snapshots>
         </repository>
     </repositories>
+
+    <developers>
+        <developer>
+            <id>pedromagno11</id>
+            <name>Pedro Magno</name>
+            <email>pedromagnopro@gmail.com</email>
+        </developer>
+    </developers>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
