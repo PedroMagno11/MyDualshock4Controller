@@ -10,7 +10,7 @@ Foi criado como uma iniciativa pessoal e de aprendizado, portanto, **sem garanti
 
 ## 🚀 Motivação
 
-No passado, diversas bibliotecas permitiam a comunicação com controles de videogame em Java, mas muitas deixaram de ser mantidas. Esta biblioteca foi criada para **preencher essa lacuna.
+No passado, diversas bibliotecas permitiam a comunicação com controles de videogame em Java, mas muitas deixaram de ser mantidas. Esta biblioteca foi criada para preencher essa lacuna.
 
 ---
 
