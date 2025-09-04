@@ -6,7 +6,7 @@
 
     <groupId>br.com.pedromagno</groupId>
     <artifactId>myDualshock4Controller</artifactId>
-    <version>1.0</version>
+    <version>1.1.0</version>
 
     <name>My Dualshock 4 Controller Driver</name>
     <description>Java library to interface with DualShock 4 controllers via hid4java</description>

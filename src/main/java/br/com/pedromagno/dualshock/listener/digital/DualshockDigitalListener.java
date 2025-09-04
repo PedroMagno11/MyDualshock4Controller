@@ -1,33 +1,33 @@
 package br.com.pedromagno.dualshock.listener.digital;
 
 
-public interface DualshockDigitalListener {
-    void buttonCROSSPressed();
-    void buttonCROSSReleased();
-    void buttonSQUAREPressed();
-    void buttonSQUAREReleased();
-    void buttonTRIANGLEPressed();
-    void buttonTRIANGLEReleased();
-    void buttonCIRCLEPressed();
-    void buttonCIRCLEReleased();
+public interface DualshockDigitalListener<E> {
+    E buttonCROSSPressed();
+    E buttonCROSSReleased();
+    E buttonSQUAREPressed();
+    E buttonSQUAREReleased();
+    E buttonTRIANGLEPressed();
+    E buttonTRIANGLEReleased();
+    E buttonCIRCLEPressed();
+    E buttonCIRCLEReleased();
 
-    void buttonDPAD_UPPressed();
-    void buttonDPAD_UPReleased();
-    void buttonDPAD_DOWNPressed();
-    void buttonDPAD_DOWNReleased();
-    void buttonDPAD_LEFTPressed();
-    void buttonDPAD_LEFTReleased();
-    void buttonDPAD_RIGHTPressed();
-    void buttonDPAD_RIGHTReleased();
+    E buttonDPAD_UPPressed();
+    E buttonDPAD_UPReleased();
+    E buttonDPAD_DOWNPressed();
+    E buttonDPAD_DOWNReleased();
+    E buttonDPAD_LEFTPressed();
+    E buttonDPAD_LEFTReleased();
+    E buttonDPAD_RIGHTPressed();
+    E buttonDPAD_RIGHTReleased();
 
-    void buttonL1Pressed();
-    void buttonL1Released();
-    void buttonR1Pressed();
-    void buttonR1Released();
+    E buttonL1Pressed();
+    E buttonL1Released();
+    E buttonR1Pressed();
+    E buttonR1Released();
 
-    void buttonSHAREPressed();
-    void buttonSHAREReleased();
+    E buttonSHAREPressed();
+    E buttonSHAREReleased();
 
-    void buttonOPTIONSPressed();
-    void buttonOPTIONSReleased();
+    E buttonOPTIONSPressed();
+    E buttonOPTIONSReleased();
 }
